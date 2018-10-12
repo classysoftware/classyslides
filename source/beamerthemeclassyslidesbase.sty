@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{beamerthemeclassyslidesbase}[2017/24/12 template definitions for classy slides]
 
+% TODO simplify comments
+
 %!%!%!%!%!%!%!%!%
 %! dependencies %
 %!%!%!%!%!%!%!%!%
@@ -19,6 +21,9 @@
 \RequirePackage{bera, cmbright, lato, inconsolata}
 % TODO rm?
 % \RequirePackage[breakwords]{truncate}
+
+%! Content page flag.
+\newif\ifcontentpage\contentpagefalse
 
 \defbeamertemplate{title page}{classy title page}[1][0]{%
 	\begingroup\noindent%
@@ -41,5 +46,27 @@
 	\end{beamercolorbox}
 	\endgroup}
 \setbeamertemplate{title page}[classy title page]
+
+\defbeamertemplate*{section page}{classy section page}[1][]{%
+	\begingroup\noindent%
+		%! use a combination of `\makebox` and `\minipage` for centered content
+		\makebox[\textwidth][c]{
+		\begin{minipage}[c]{0.85\paperwidth}%
+			\vskip2em%
+			\begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
+				\usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
+			\end{beamercolorbox}\par%
+			%! Optional subtitle
+			\ifx\insertsubsection\@empty\relax%
+			\else
+				\vskip0.25cm\par%
+    			\begin{beamercolorbox}[sep=0.20cm, center]{subsection in section page}%
+					\usebeamerfont{subsection in section page}\usebeamercolor{subsection in section page}\insertsectionnumber.\insertsubsectionnumber~~\insertsubsection\par%
+				\end{beamercolorbox}\par%
+			\fi
+		\end{minipage}}%
+	\endgroup}
+\setbeamertemplate{classy section page}[my section page]
+
 
 \makeatother
