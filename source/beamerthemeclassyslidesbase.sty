@@ -7,20 +7,24 @@
 %! dependencies %
 %!%!%!%!%!%!%!%!%
 
-%! font encoding
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
-%! font style
 \RequirePackage{color}
-%! verbatim code
 \RequirePackage{listings, lstautogobble}
 \RequirePackage{tikz}
 \RequirePackage{pdftexcmds}
 \RequirePackage{graphicx}
 \RequirePackage[most]{tcolorbox}
 \RequirePackage{bera, cmbright, lato, inconsolata}
-% TODO rm?
-% \RequirePackage[breakwords]{truncate}
+\RequirePackage[breakwords]{truncate}
+
+% HYPERREF SETTINGS
+\hypersetup{colorlinks=false}
+
+% TIKZ SETTINGS
+\usetikzlibrary{positioning, shapes.arrows, shapes.misc, fadings, calc, shadows.blur, patterns}
+\tikzfading[name=fade right, left color=transparent!0, right color=transparent!100]
+\tikzfading[name=fade left, left color=transparent!100, right color=transparent!0]
 
 %! Content page flag.
 \newif\ifcontentpage\contentpagefalse
@@ -62,7 +66,7 @@
 }
 \def\node@on@layer{\aftergroup\node@@on@layer}
 
-\defbeamertemplate{headline}{my headline}[1][]{%
+\defbeamertemplate{headline}{classy headline}[1][]{%
     \bgroup%
     %! Calculate progress bar width
     \setcounter{@@frames}{\insertframenumber}%
@@ -90,13 +94,31 @@
                 % %! Draw the progress bar.
                 \draw[on layer=back, draw=none, fill=fg!15] (0, 0) rectangle (\paperwidth, 0.5cm);%
                 \draw[on layer=main, draw=none, fill=fg] (0, 0) rectangle (\progressbarwidth, 0.5cm);%
-                \draw[on layer=main, draw=fg!35, line width=1pt] (0, 0cm) -- (\paperwidth, 0cm);%
+                \draw[on layer=main, draw=fg!25, line width=1pt] (0, 0cm) -- (\paperwidth, 0cm);%
             \end{tikzpicture}%
         \fi
     \end{beamercolorbox}
 	\egroup%
 }
-\setbeamertemplate{headline}[my headline]
+\setbeamertemplate{headline}[classy headline]
+
+\defbeamertemplate{frametitle}{classy frametitle}[1][0]{%
+    \bgroup%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
+        \begin{tikzpicture}%
+            \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
+            \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
+                \truncate{\linewidth}{%
+                    \insertframetitle%
+                    % In case of a split frame, append the frame partition number.
+                    \ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
+                }%
+            };%
+        \end{tikzpicture}
+    \end{beamercolorbox}
+    \egroup%
+}
+\setbeamertemplate{frametitle}[classy frametitle]
 
 \defbeamertemplate{title page}{classy title page}[1][0]{%
 	\begingroup\noindent%
@@ -117,7 +139,8 @@
             \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
         \end{beamercolorbox}\par%
 	\end{beamercolorbox}
-	\endgroup}
+    \endgroup%
+}
 \setbeamertemplate{title page}[classy title page]
 
 \defbeamertemplate*{section page}{classy section page}[1][]{%
@@ -138,7 +161,8 @@
 				\end{beamercolorbox}\par%
 			\fi
 		\end{minipage}}%
-	\endgroup}
+    \endgroup%
+}
 \setbeamertemplate{classy section page}[my section page]
 
 
