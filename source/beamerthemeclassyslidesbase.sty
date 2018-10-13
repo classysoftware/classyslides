@@ -37,12 +37,17 @@
 \newcounter{@@frames}
 \newcounter{@@total}
 
-\definecolor{background-color}{RGB}{255, 255, 255}
+\colorlet{background-color}{white}
+\colorlet{foreground-color}{black}
 \colorlet{accent-color}{blue}
-%\definecolor{background-color}{white}
+\colorlet{highlight-color}{accent-color!50}
 
+\setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
 \setbeamercolor{progress bar}{fg=accent-color}
-\setbeamercolor{block}{bg=background-color}
+\setbeamercolor{block}{parent=normal text}
+\setbeamercolor{block title}{parent=normal text}
+\setbeamercolor{itemize item}{parent=normal text, bg=accent-color!50}
+\setbeamercolor{enumerate item}{parent=normal text, bg=accent-color!50}
 
 %
 %! Declare pgf layers for z-level in tikz pictures
@@ -126,7 +131,8 @@
 \setbeamertemplate{frametitle}[classy frametitle]
 
 \defbeamertemplate{title page}{classy title page}[1][0]{%
-	\begingroup\noindent%
+    \bgroup%
+    \noindent%
 	\begin{beamercolorbox}{title page}%
         \vskip2em%
         \begin{beamercolorbox}[sep=0.10cm, center]{}%
@@ -144,12 +150,13 @@
             \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
         \end{beamercolorbox}\par%
 	\end{beamercolorbox}
-    \endgroup%
+    \egroup%
 }
 \setbeamertemplate{title page}[classy title page]
 
 \defbeamertemplate*{section page}{classy section page}[1][]{%
-	\begingroup\noindent%
+    \bgroup%
+    \noindent%
 		%! use a combination of `\makebox` and `\minipage` for centered content
 		\makebox[\textwidth][c]{
 		\begin{minipage}[c]{0.85\paperwidth}%
@@ -166,9 +173,44 @@
 				\end{beamercolorbox}\par%
 			\fi
 		\end{minipage}}%
-    \endgroup%
+    \egroup%
 }
 \setbeamertemplate{classy section page}[my section page]
+
+
+\defbeamertemplate{itemize item}{classy itemize item}[1][]{%
+    \bgroup%
+    \tikz{%
+        \draw[draw=none, use as bounding box] rectangle (\baselineskip, \baselineskip);
+        \node[below left=0pt and 0pt of current bounding box.east, minimum width=0.4\baselineskip, minimum height=0.4\baselineskip, inner sep=0pt, outer sep=0pt, fill=highlight-color, circle] (text) {}
+    }%
+    \egroup%
+}
+\setbeamertemplate{itemize item}[classy itemize item]
+
+\setbeamertemplate{itemize subitem}{%
+    \bgroup%
+    \usebeamercolor{itemize subitem}\usebeamercolor{itemize subitem}{---}%
+    \egroup%
+}
+
+
+\defbeamertemplate{enumerate item}{classy enumerate item}[1][]{%
+    \bgroup%
+    \usebeamercolor{enumerate item}%
+	\tikz[baseline=(text.base)]{%
+		\node[minimum width=1.5em, minimum height=1.5em, inner sep=2pt, outer sep=0pt, fill=bg] (text) {\color{fg}\insertenumlabel}%
+    }%
+    \egroup%
+}
+\setbeamertemplate{enumerate item}[classy enumerate item]
+
+\defbeamertemplate{enumerate subitem}{classy enumerate subitem}[1][]{%
+	\bgroup%
+	\color{highlight-color}\insertsubenumlabel%
+	\egroup%
+}
+\setbeamertemplate{enumerate enumerate}[classy enumerate subitem]
 
 \newenvironment<>{Block}[2][]{%
 	\bgroup%
