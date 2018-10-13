@@ -56,6 +56,8 @@
 \setbeamercolor{block title}{parent=normal text}
 \setbeamercolor{itemize item}{parent=normal text, bg=accent-color!50}
 \setbeamercolor{enumerate item}{parent=normal text, bg=accent-color!50}
+\setbeamercolor{section in toc}{parent=normal text}
+\setbeamercolor{subsection in toc}{parent=normal text}
 
 %
 %! Declare pgf layers for z-level in tikz pictures
@@ -138,6 +140,8 @@
 }
 \setbeamertemplate{frametitle}[classy frametitle]
 
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
 \defbeamertemplate{footline}{my footline}[1][0]{%
     \bgroup%
         \def\footline{%
@@ -162,9 +166,6 @@
 	\egroup%
 }
 \setbeamertemplate{footline}[my footline]
-
-% Remove navigation symbols
-\setbeamertemplate{navigation symbols}{}
 
 \defbeamertemplate{title page}{classy title page}[1][0]{%
     \bgroup%
@@ -246,6 +247,10 @@
 	\egroup%
 }
 \setbeamertemplate{enumerate enumerate}[classy enumerate subitem]
+
+% HREF http://tex.stackexchange.com/a/69721
+\setbeamertemplate{section in toc}{{\usebeamerfont{section in toc}\usebeamercolor{section in toc}\inserttocsectionnumber.~\inserttocsection}\par}
+\setbeamertemplate{subsection in toc}{\hskip1em\relax\usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
 
 \newenvironment<>{Block}[2][]{%
 	\bgroup%
