@@ -164,7 +164,7 @@
 \setbeamertemplate{navigation symbols}{}
 \defbeamertemplate{footline}{my footline}[1][0]{%
     \bgroup%
-        \def\footline{%
+        \def\footlineNonContent{%
             \begin{beamercolorbox}[ht=0.5cm]{footline}%
                 \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, left]{}%
                     \truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertshortauthor}%
@@ -177,12 +177,21 @@
                 \end{beamercolorbox}%
             \end{beamercolorbox}%	
         }%
+        \def\footlineContent{%
+            \edef\frame{\the\numexpr\the@@frame + 1}%
+            \edef\total{\the\numexpr\the@@total + 1}%
+            \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=0.5cm, wd=\paperwidth, right]{footline}%
+                \frame~of \total%
+            \end{beamercolorbox}%	
+        }%
 		% Only draw the footline on the first page and non content pages
         \ifnum\thepage=1\relax%
-            \footline%
-        \else\ifcontentpage\else%
-            \footline%
-        \fi\fi%
+            \footlineNonContent%
+            \else\ifcontentpage\else%
+                \footlineNonContent%
+            \fi%
+            \footlineContent%
+        \fi%
 	\egroup%
 }
 \setbeamertemplate{footline}[my footline]
