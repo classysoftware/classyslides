@@ -130,6 +130,34 @@
 }
 \setbeamertemplate{frametitle}[classy frametitle]
 
+\defbeamertemplate{footline}{my footline}[1][0]{%
+    \bgroup%
+        \def\footline{%
+            \begin{beamercolorbox}[ht=0.5cm]{footline}%
+                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, left]{}%
+                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertshortauthor}%
+                \end{beamercolorbox}%
+                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.60\paperwidth, center]{}%
+                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\inserttitle}%
+                \end{beamercolorbox}%
+                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, right]{}%
+                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertdate}%
+                \end{beamercolorbox}%
+            \end{beamercolorbox}%	
+        }%
+		% Only draw the footline on the first page and non content pages
+        \ifnum\thepage=1\relax%
+            \footline%
+        \else\ifcontentpage\else%
+            \footline%
+        \fi\fi%
+	\egroup%
+}
+\setbeamertemplate{footline}[my footline]
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
 \defbeamertemplate{title page}{classy title page}[1][0]{%
     \bgroup%
     \noindent%
@@ -176,7 +204,6 @@
     \egroup%
 }
 \setbeamertemplate{classy section page}[my section page]
-
 
 \defbeamertemplate{itemize item}{classy itemize item}[1][]{%
     \bgroup%
