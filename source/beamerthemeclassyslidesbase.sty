@@ -30,6 +30,13 @@
 \tcbuselibrary{skins}
 \tcbuselibrary{listings}
 
+% BEAMER SETTINGS
+\usetheme{default}
+\useoutertheme{infolines}
+\useinnertheme{circles}
+\setbeamersize{text margin left=0.5cm,text margin right=0.5cm} 
+
+
 %! Content page flag.
 \newif\ifcontentpage\contentpagefalse
 
@@ -43,6 +50,7 @@
 \colorlet{highlight-color}{accent-color!50}
 
 \setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
+\setbeamercolor{alerted text}{fg=highlight-color}
 \setbeamercolor{progress bar}{fg=accent-color}
 \setbeamercolor{block}{parent=normal text}
 \setbeamercolor{block title}{parent=normal text}
@@ -124,8 +132,8 @@
                     \ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
                 }%
             };%
-        \end{tikzpicture}
-    \end{beamercolorbox}
+        \end{tikzpicture}%
+    \end{beamercolorbox}%
     \egroup%
 }
 \setbeamertemplate{frametitle}[classy frametitle]
@@ -177,7 +185,7 @@
             \ifx\insertdate\@empty\relax\else{\usebeamerfont{date}\usebeamercolor{date}\insertdate}\\\fi%
             \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
         \end{beamercolorbox}\par%
-	\end{beamercolorbox}
+	\end{beamercolorbox}%
     \egroup%
 }
 \setbeamertemplate{title page}[classy title page]
@@ -186,21 +194,22 @@
     \bgroup%
     \noindent%
 		%! use a combination of `\makebox` and `\minipage` for centered content
-		\makebox[\textwidth][c]{
-		\begin{minipage}[c]{0.85\paperwidth}%
-			\vskip2em%
-			\begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
-				\usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
-			\end{beamercolorbox}\par%
-			%! Optional subtitle
-			\ifx\insertsubsection\@empty\relax%
-			\else
-				\vskip0.25cm\par%
-    			\begin{beamercolorbox}[sep=0.20cm, center]{subsection in section page}%
-					\usebeamerfont{subsection in section page}\usebeamercolor{subsection in section page}\insertsectionnumber.\insertsubsectionnumber~~\insertsubsection\par%
-				\end{beamercolorbox}\par%
-			\fi
-		\end{minipage}}%
+		\makebox[\textwidth][c]{%
+            \begin{minipage}[c]{0.85\paperwidth}%
+                \vskip2em%
+                \begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
+                    \usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
+                \end{beamercolorbox}\par%
+                %! Optional subtitle
+                \ifx\insertsubsection\@empty\relax%
+                \else%
+                    \vskip0.25cm\par%
+                    \begin{beamercolorbox}[sep=0.20cm, center]{subsection in section page}%
+                        \usebeamerfont{subsection in section page}\usebeamercolor{subsection in section page}\insertsectionnumber.\insertsubsectionnumber~~\insertsubsection\par%
+                    \end{beamercolorbox}\par%
+                \fi%
+            \end{minipage}
+        }%
     \egroup%
 }
 \setbeamertemplate{classy section page}[my section page]
@@ -208,8 +217,8 @@
 \defbeamertemplate{itemize item}{classy itemize item}[1][]{%
     \bgroup%
     \tikz{%
-        \draw[draw=none, use as bounding box] rectangle (\baselineskip, \baselineskip);
-        \node[below left=0pt and 0pt of current bounding box.east, minimum width=0.4\baselineskip, minimum height=0.4\baselineskip, inner sep=0pt, outer sep=0pt, fill=highlight-color, circle] (text) {}
+        \draw[draw=none, use as bounding box] rectangle (\baselineskip, \baselineskip);%
+        \node[below left=0pt and 0pt of current bounding box.east, minimum width=0.4\baselineskip, minimum height=0.4\baselineskip, inner sep=0pt, outer sep=0pt, fill=highlight-color, circle] (text) {}%
     }%
     \egroup%
 }
@@ -221,12 +230,11 @@
     \egroup%
 }
 
-
 \defbeamertemplate{enumerate item}{classy enumerate item}[1][]{%
     \bgroup%
     \usebeamercolor{enumerate item}%
 	\tikz[baseline=(text.base)]{%
-		\node[minimum width=1.5em, minimum height=1.5em, inner sep=2pt, outer sep=0pt, fill=bg] (text) {\color{fg}\insertenumlabel}%
+		\node[minimum width=1.5em, minimum height=1.5em, inner sep=2pt, outer sep=0pt, draw=none] (text) {\color{highlight-color}\insertenumlabel.}%
     }%
     \egroup%
 }
@@ -255,8 +263,9 @@
 		, middle=0pt%
 		, boxsep=12pt%
 		, boxrule=0pt%
-		% , grow to left by=-3pt%
-		, colframe=background-color%
+        % , grow to left by=12pt%
+        % , grow to right by=12pt%
+		, colframe=bg%
 		, colback=bg%
 		, colbacktitle=bg%
 		% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
