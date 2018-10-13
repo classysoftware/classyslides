@@ -88,10 +88,11 @@
 \setbeamerfont{section in section page}{family=\rmfamily, size=\Huge}
 \setbeamerfont{subsection in section page}{family=\rmfamily, size=\Large}
 \setbeamerfont{frametitle}{family=\sffamily, size=\LARGE, series=\bfseries\itshape\selectfont}
+\setbeamerfont{footline}{family=\rmfamily}
 \setbeamerfont{section in toc}{family=\sffamily, series=\bfseries}
 \setbeamerfont{subsection in toc}{family=\sffamily, series=\fontseries{l}\selectfont}
 \setbeamerfont{block}{parent=normal text, series=\upshape\selectfont}
-\setbeamerfont{block title}{parent=frametitle, size=\large, series=\bfseries\itshape\selectfont}
+\setbeamerfont{block title}{parent=frametitle, size=\large}
     
 % VARIABLES
 \newif\ifcontentpage\contentpagefalse
@@ -164,34 +165,17 @@
 \setbeamertemplate{navigation symbols}{}
 \defbeamertemplate{footline}{my footline}[1][0]{%
     \bgroup%
-        \def\footlineNonContent{%
-            \begin{beamercolorbox}[ht=0.5cm]{footline}%
-                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, left]{}%
-                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertshortauthor}%
-                \end{beamercolorbox}%
-                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.60\paperwidth, center]{}%
-                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\inserttitle}%
-                \end{beamercolorbox}%
-                \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=\dimexpr0.5cm, wd=0.20\paperwidth, right]{}%
-                    \truncate{\dimexpr0.20\paperwidth-0.165cm}{\insertdate}%
-                \end{beamercolorbox}%
-            \end{beamercolorbox}%	
-        }%
-        \def\footlineContent{%
-            \edef\frame{\the\numexpr\the@@frame + 1}%
-            \edef\total{\the\numexpr\the@@total + 1}%
-            \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=0.5cm, wd=\paperwidth, right]{footline}%
-                \frame~of \total%
-            \end{beamercolorbox}%	
-        }%
-		% Only draw the footline on the first page and non content pages
-        \ifnum\thepage=1\relax%
-            \footlineNonContent%
-            \else\ifcontentpage\else%
-                \footlineNonContent%
+        % Only draw the footline on content pages
+        \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth, right]{footline}%
+            \ifnum\thepage=1\else%
+                \ifcontentpage%
+                    \edef\frame{\the\numexpr\the@@frame + 1}%
+                    \edef\total{\the\numexpr\the@@total + 1}%
+                    \frame~of \total
+                \else%
+                \fi%
             \fi%
-            \footlineContent%
-        \fi%
+        \end{beamercolorbox}%
 	\egroup%
 }
 \setbeamertemplate{footline}[my footline]
@@ -315,7 +299,7 @@
 %		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
 %		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
 		, segmentation style={draw=none}%
-		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
 		, #1
 	}%
 	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
@@ -347,6 +331,50 @@
 	\begin{Block}[#1]{Definition: #2}%
 }{%
 	\end{Block}
+}
+
+%! Code listings with simple customization options (target language for listing and title for tcolorbox)
+\newtcblisting{Code}[2][]{%
+    enhanced%
+    , sharp corners%
+    , no shadow%
+    , top=0pt%
+    , right=0pt%
+    , bottom=0pt%
+    , left=0pt%
+    , toptitle=0pt%
+    , bottomtitle=-12pt%
+    , middle=0pt%
+    , boxsep=12pt%
+    , boxrule=0pt%
+	, colframe=white%
+	, colback=bg%
+    , colbacktitle=bg%
+    , coltitle=fg%
+	% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+	% , frame code={
+	% 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);
+	% }%
+	, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+	, listing only%
+	, listing options={%
+		breaklines=true%
+		, autogobble%
+		, tabsize=2%
+		, aboveskip=0pt%
+		, belowskip=0pt%
+		, xleftmargin=0pt%
+		, xrightmargin=0pt%
+		, framesep=0pt%
+		, framerule=0pt%
+		, rulesep=0pt%
+		, framexrightmargin=0pt%
+		, framexleftmargin=0pt%		
+        , numbersep=0pt%,
+        , basicstyle=\ttfamily\small%
+		, language=#1%
+    },%
+    before={\usebeamercolor{block}\usebeamerfont{block}}%
 }
 
 \makeatother
