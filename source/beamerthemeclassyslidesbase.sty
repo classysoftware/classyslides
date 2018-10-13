@@ -26,6 +26,10 @@
 \tikzfading[name=fade right, left color=transparent!0, right color=transparent!100]
 \tikzfading[name=fade left, left color=transparent!100, right color=transparent!0]
 
+% TCOLORBOX SETTINGS
+\tcbuselibrary{skins}
+\tcbuselibrary{listings}
+
 %! Content page flag.
 \newif\ifcontentpage\contentpagefalse
 
@@ -38,6 +42,7 @@
 %\definecolor{background-color}{white}
 
 \setbeamercolor{progress bar}{fg=accent-color}
+\setbeamercolor{block}{bg=background-color}
 
 %
 %! Declare pgf layers for z-level in tikz pictures
@@ -165,5 +170,68 @@
 }
 \setbeamertemplate{classy section page}[my section page]
 
+\newenvironment<>{Block}[2][]{%
+	\bgroup%
+	\usebeamercolor{block}%
+	\tcbset{%
+		enhanced%
+		, sharp corners%
+        , no shadow%
+		, top=0pt%
+		, right=0pt%
+		, bottom=0pt%
+		, left=0pt%
+		, toptitle=0pt%
+		, bottomtitle=-12pt%
+		, middle=0pt%
+		, boxsep=12pt%
+		, boxrule=0pt%
+		% , grow to left by=-3pt%
+		, colframe=background-color%
+		, colback=bg%
+		, colbacktitle=bg%
+		% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+		% , frame code={%
+		% 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);%
+		% }%
+		% , colframe=dark-gray%
+%		, fonttitle=\rmfamily%
+%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+%		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+		, segmentation style={draw=none}%
+		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+		, #1
+	}%
+	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+	\begin{tcolorbox}%
+	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+\renewenvironment<>{Theorem}[2][]{%
+	\begin{Block}[#1]{Theorem: #2}%
+}{%
+	\end{Block}
+}
+\renewenvironment<>{Proof}[1][]{%
+	\begin{Block}[#1]{Proof:}%
+}{%
+	\end{Block}
+}
+
+\renewenvironment<>{Example}[1][]{%
+	\begin{Block}[#1]{Example:}%
+}{%
+	\end{Block}
+}
+
+\renewenvironment<>{Definition}[2][]{%
+	\begin{Block}[#1]{Definition: #2}%
+}{%
+	\end{Block}
+}
 
 \makeatother
