@@ -60,6 +60,9 @@
 \setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
 
 \setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
+\setbeamercolor{title page}{parent=normal text}
+\setbeamercolor{title}{parent=title page}
+\setbeamercolor{subtitle}{parent=title page}
 \setbeamercolor{frametitle}{parent=normal text}
 \setbeamercolor{alerted text}{fg=highlight-color}
 \setbeamercolor{progress bar}{fg=accent-color}
@@ -79,8 +82,9 @@
 \setbeamercolor*{bibliography entry note}{parent=normal text}
 
 \setbeamerfont{normal text}{family=\sffamily}
-\setbeamerfont{title}{family=\rmfamily, size=\Huge}
-\setbeamerfont{subtitle}{family=\rmfamily, size=\Large}
+\setbeamerfont{title page}{family=\rmfamily}
+\setbeamerfont{title}{parent=title page, size=\Huge}
+\setbeamerfont{subtitle}{parent=title page, size=\Large}
 \setbeamerfont{author}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
 \setbeamerfont{institute}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
 \setbeamerfont{date}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
@@ -181,23 +185,23 @@
 \defbeamertemplate{title page}{classy title page}[1][0]{%
     \bgroup%
     \noindent%
-	\begin{beamercolorbox}{title page}%
-        \vskip2em%
-        \begin{beamercolorbox}[sep=0.10cm, center]{}%
-            \usebeamerfont{title}\inserttitle\par%
-        \end{beamercolorbox}\par%
-        \vskip0.5cm\par%
-        \begin{beamercolorbox}[sep=0.10cm, center]{}%
-            \ifx\insertsubtitle\@empty\relax\else{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\fi%			
-        \end{beamercolorbox}\par%
-        \vskip0.25cm\relax%
-        \begin{beamercolorbox}[sep=0.20cm, center]{}%
-            \ifx\insertinstitute\@empty\relax\else{\usebeamerfont{institute}\usebeamercolor{institute}\insertinstitute}\\\fi%
-            {\usebeamerfont{author}\usebeamercolor{author}\insertauthor}\\%
-            \ifx\insertdate\@empty\relax\else{\usebeamerfont{date}\usebeamercolor{date}\insertdate}\\\fi%
-            \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
-        \end{beamercolorbox}\par%
-	\end{beamercolorbox}%
+    \vskip2em%
+    \begin{beamercolorbox}[sep=0.10cm, center]{title}%
+        \usebeamercolor{title}\usebeamerfont{title}%
+        \inserttitle\par%
+    \end{beamercolorbox}\par%
+    \vskip0.5cm\par%
+    \begin{beamercolorbox}[sep=0.10cm, center]{subtitle}%
+        \usebeamercolor{subtitle}\usebeamerfont{subtitle}
+        \ifx\insertsubtitle\@empty\relax\else\insertsubtitle\fi%
+    \end{beamercolorbox}\par%
+    \vskip0.25cm\relax%
+    \begin{beamercolorbox}[sep=0.20cm, center]{}%
+        \ifx\insertinstitute\@empty\relax\else{\usebeamerfont{institute}\usebeamercolor{institute}\insertinstitute}\\\fi%
+        {\usebeamerfont{author}\usebeamercolor{author}\insertauthor}\\%
+        \ifx\insertdate\@empty\relax\else{\usebeamerfont{date}\usebeamercolor{date}\insertdate}\\\fi%
+        \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
+    \end{beamercolorbox}\par%
     \egroup%
 }
 \setbeamertemplate{title page}[classy title page]
