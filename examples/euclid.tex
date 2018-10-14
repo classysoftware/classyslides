@@ -5,6 +5,7 @@
   % Select the classyslides base, fonts and dark theme.
   \usetheme{classyslidesbase}
   \usetheme{classyslidesfonts}
+  \usetheme{classyslideslight}
   \mode<presentation>
   
   \title{There Is No Largest Prime Number}
@@ -105,18 +106,18 @@
   
   \begin{frame}[fragile]
     \frametitle{An Algorithm For Finding Prime Numbers.}
-    \begin{Code}[C++]{\texttt{FindPrimeNumbers}}
-  int main (void)
+    \begin{Code}[C++]{FindPrimeNumbers}
+int main (void)
+{
+  std::vector<bool> is_prime (100, true);
+  for (int i = 2; i < 100; i++)
+  if (is_prime[i])
   {
-    std::vector<bool> is_prime (100, true);
-    for (int i = 2; i < 100; i++)
-    if (is_prime[i])
-    {
-      std::cout << i << " ";
-      for (int j = i; j < 100; is_prime [j] = false, j+=i);
-      }
-      return 0;
-  }
+    std::cout << i << " ";
+    for (int j = i; j < 100; is_prime [j] = false, j+=i);
+    }
+    return 0;
+}
     \end{Code}
     \begin{uncoverenv}<2>
       Note the use of \verb|std::|.

@@ -1,12 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{beamerthemeclassyslidesbase}[2017/24/12 template definitions for classy slides]
 
-% TODO simplify comments
-
-%!%!%!%!%!%!%!%!%
-%! dependencies %
-%!%!%!%!%!%!%!%!%
-
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{color}
@@ -15,7 +9,6 @@
 \RequirePackage{pdftexcmds}
 \RequirePackage{graphicx}
 \RequirePackage[most]{tcolorbox}
-%\RequirePackage{bera, cmbright, lato, inconsolata}
 \RequirePackage[breakwords]{truncate}
 \RequirePackage{biblatex}
 \RequirePackage{lastpage}
@@ -29,17 +22,14 @@
 \tikzfading[name=fade right, left color=transparent!0, right color=transparent!100]
 \tikzfading[name=fade left, left color=transparent!100, right color=transparent!0]
 
-%
-%! Declare pgf layers for z-level in tikz pictures
-%!ref: http://tex.stackexchange.com/a/20426
-%
+% Declare pgf layers for z-level in tikz pictures
+% HREF http://tex.stackexchange.com/a/20426
 \pgfdeclarelayer{back}
 \pgfdeclarelayer{front}
 \pgfsetlayers{back,main,front}
 
-%! Define tikz keys for layering.
-%!ref: http://tex.stackexchange.com/a/20426
-%\makeatletter
+% Define tikz keys for layering.
+% HREF http://tex.stackexchange.com/a/20426
 \pgfkeys{%
     /tikz/on layer/.code={
         \pgfonlayer{#1}\begingroup
@@ -127,7 +117,7 @@
             \divide\dimen0 by 100%
             \multiply\dimen0 by \the@@frame%
             \divide\dimen0 by \the@@total%
-            %! This equals `<paperwidth>/100 * (<frames> - 1) / (<total> - 1) * 100`
+            % This equals `<paperwidth>/100 * (<frames> - 1) / (<total> - 1) * 100`
             \multiply\dimen 0 by 100%
         \fi%
         \edef\progressbarwidth{\the\dimen0}%
@@ -138,7 +128,6 @@
                 \usebeamercolor{progress bar}%
                 \begin{tikzpicture}%
                     \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 0.5cm);%
-                    % %! Draw the progress bar.
                     \draw[on layer=back, draw=none, fill=fg!15] (0, 0) rectangle (\paperwidth, 0.5cm);%
                     \draw[on layer=main, draw=none, fill=fg] (0, 0) rectangle (\progressbarwidth, 0.5cm);%
                     \draw[on layer=main, draw=fg!50!bg, line width=1pt] (0, 0cm) -- (\paperwidth, 0cm);%
@@ -214,14 +203,14 @@
 \defbeamertemplate*{section page}{classy section page}[1][]{%
     \bgroup%
     \noindent%
-		%! use a combination of `\makebox` and `\minipage` for centered content
+		% Use a combination of `\makebox` and `\minipage` for centered content
 		\makebox[\textwidth][c]{%
             \begin{minipage}[c]{0.85\paperwidth}%
                 \vskip2em%
                 \begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
                     \usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
                 \end{beamercolorbox}\par%
-                %! Optional subtitle
+                % Optional subsection
                 \ifx\insertsubsection\@empty\relax%
                 \else%
                     \vskip0.25cm\par%
@@ -279,7 +268,6 @@
     \bgroup%
     \usebeamerfont{block}\usebeamercolor{block}\color{fg}%
 	\tcbset{%
-        % before={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
 		enhanced%
 		, sharp corners%
         , no shadow%
@@ -292,25 +280,12 @@
 		, middle=0pt%
 		, boxsep=12pt%
 		, boxrule=0pt%
-        % , grow to left by=12pt%
-        % , grow to right by=12pt%
 		, colframe=bg%
 		, colback=bg%
 		, colbacktitle=bg%
-		% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-		% , frame code={%
-		% 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);%
-		% }%
-		% , colframe=dark-gray%
-%		, fonttitle=\rmfamily%
-%		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
-%		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
-%		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-%		, segmentation style={draw=none}%
         , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
 		, #1
 	}%
-	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
 	\begin{tcolorbox}%
 	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
 }{%
@@ -357,52 +332,14 @@
             , middle=0pt%
             , boxsep=12pt%
             , boxrule=0pt%
-            % , grow to left by=12pt%
-            % , grow to right by=12pt%
             , colframe=bg%
             , colback=bg%
             , colbacktitle=bg%
-            % , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-            % , frame code={%
-            % 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);%
-            % }%
-            % , colframe=dark-gray%
-    %		, fonttitle=\rmfamily%
-    %		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
-    %		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
-    %		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-    %		, segmentation style={draw=none}%
-            % TODO there is a bug here which prevents the frametitle formatting (bold + italic)
             , title={%
                 \usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}
             }%
         }%
     }%
-    % , enhanced%
-    % , sharp corners%
-    % , no shadow%
-    % , top=0pt%
-    % , right=0pt%
-    % , bottom=0pt%
-    % , left=0pt%
-    % , toptitle=0pt%
-    % , bottomtitle=-12pt%
-    % , middle=0pt%
-    % , boxsep=12pt%
-    % , boxrule=0pt%
-    % , colframe=bg%
-    % , colback=bg%
-    % , colbacktitle=bg%
-	% , colframe=bg%
-	% , colback=bg%
-    % , colbacktitle=bg%
-	% % , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-	% % , frame code={
-	% % 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);
-	% % }%
-	% % , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
-    % , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
-    % % , code={\usebeamercolor{block}\usebeamerfont{block}\color{fg}}%
 	, listing only%
 	, listing options={%
 		breaklines=true%
