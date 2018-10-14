@@ -1,0 +1,71 @@
+\documentclass{beamer} 
+
+\usepackage{filecontents}
+
+% Select the classyslides base, fonts and dark theme.
+\usetheme{classyslidesbase}
+\usetheme{classyslidesfonts}
+\mode<presentation>
+
+\title{Quickstart}
+\author[?YOU]{?YOU \\ me@mail.com}
+\date{\today}
+
+% Bibliography
+\begin{filecontents}{euclid.bib}
+  @book{Labov1972,
+    Address = {Philadelphia},
+    Author = {William Labov},
+    Publisher = {University of Pennsylvania Press},
+    Title = {Sociolinguistic Patterns},
+    Year = {1972}}
+
+@book{Chomsky1957,
+    Address = {The Hague},
+    Author = {Noam Chomsky},
+    Publisher = {Mouton},
+    Title = {Syntactic Structures},
+    Year = {1957}}
+}
+\end{filecontents}
+\addbibresource{./euclid.bib}
+
+% Document
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\contentpagetrue
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Section A}
+\subsection{Subsection I}
+\contentpagefalse
+\frame{\sectionpage}
+
+\contentpagetrue
+\begin{frame}
+  \frametitle{First slide}
+  This is the first slide!
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hello world}
+  \begin{Code}[Haskell]{hello.hs}
+import Prelude
+
+main = putStrLn "Hello, World!"
+  \end{Code}
+\end{frame}
+
+\nocite{*}
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \printbibliography
+\end{frame}
+\end{document}
