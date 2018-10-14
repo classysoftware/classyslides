@@ -277,10 +277,10 @@
 
 \newenvironment<>{Block}[2][]{%
     \bgroup%
-    \usebeamercolor{block}%
+    \usebeamerfont{block}\usebeamercolor{block}\color{fg}%
 	\tcbset{%
-        code={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
-		, enhanced%
+        % before={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
+		enhanced%
 		, sharp corners%
         , no shadow%
 		, top=0pt%
@@ -312,7 +312,7 @@
 	}%
 	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
 	\begin{tcolorbox}%
-%	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
+	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
 }{%
 	\end{tcolorbox}%
 	\egroup%
@@ -341,7 +341,6 @@
 	\end{Block}
 }
 
-% ! Code listings with simple customization options (target language for listing and title for tcolorbox)
 \newtcblisting{Code}[2][]{%
     code={
         \usebeamercolor{block}\usebeamerfont{block}%
