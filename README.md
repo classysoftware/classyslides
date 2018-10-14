@@ -1,46 +1,54 @@
 # ABOUT
- 
-This package provides the beamer theme *classyslides*.
+
+This package provides the **classyslides** beamer theme and extensions.
+
+## USAGE
+
+1. Create a folder for your presentation (under path `$path`)
+   ```bash
+   mkdir $path
+   ```
+2. Change to the presentation directory and pull this repository
+   ```bash
+   cd $path
+   git clone https://github.com/classysoftware/classyslides.git
+   ```
+3. Copy the quickstart file in `./quickstart/quickstart.tex` and link the source files
+   ```bash
+   cp ./classyslides/quickstart/quickstart.tex .
+   ln -s classyslides/source/beamerthemeclassyslidesbase.sty
+   ln -s classyslides/source/beamerthemeclassyslidesfonts.sty
+   ln -s classyslides/source/beamerthemeclassyslidesdark.sty
+   ln -s classyslides/source/beamerthemeclassyslideslight.sty
+   ```
+4. Edit your presentation and compile
+
+```bash
+# Compile twice to see progress bar
+pdflatex quickstart.tex
+pdflatex quickstart.tex
+```
+
+Alternatively, you can add the source folder `$path/source` as a local style file. The correct way of doing this depends on your plattform and LaTeX distribution. A thorough instruction for multiple platforms/distributions can be found [here][1].
 
 ## FEATURES
 
-*classyslides* is a minimalistic beamer theme with focus on readability and unobtrusiveness. Its main features are 
+**Classyslides** is a minimalistic beamer theme with focus on clear layout and efficient use of space.
 
-* clear, readable fonts for text, math and code
-* a small progress bar at the top
-* hideable headline and footline (using the `\contentpagefalse` flag and its inverse `\contentpagetrue`)
-* simple color theme based on black, white, gray tones and accent colors
-* plain standard environment layouts using tcolorbox (`definition`, `theorem`, ...)
-* additional custom enviroments for blocks and code (`Block`, `Code`, `Code*`)
+Main features:
 
-I created this theme for presentations in academia, since I was not happy with the standard Beamer themes.
-
-# USAGE
-
-Simply copy the file 
-
-> beamerthemeclassyslides.sty
-
-into the same folder as your presentation. In the presentation preamble set the theme to *classyslides* using the command `\usetheme{classyslides}`: 
-```
-\documentclass{beamer}
-
-%...
-
-%! Select the classyslides theme.
-\usetheme{classyslides}
-
-%...
-
-\begin{document}
-
-%...
-
-\end{document}
-```
-
-Another option is to add `beamerthemeclassyslides.sty` as a local style file. The correct way of adding a local style file depends on your plattform and LaTeX distribution. A thorough instruction for multiple platforms/distributions can be found on [Stack Overflow](http://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te).
+- Small progress bar in the headline
+- Dark and light theme (extensions `beamerthemeclassyslideslight.sty` and `beamerthemeclassyslidesdark.sty`)
+- Preconfigured block, theorem and code environments:
+  - `Block`
+  - `Definition`
+  - `Example`
+  - `Theorem`
+  - `Proof`
+  - `Code` (uses the `listings` package via `tcolorbox`)
 
 # EXAMPLES
 
-The file `euclid.pdf` is compiled from the example presentation `euclid.tex` (adopted from the beamer manual).  
+The PDF files in `$path/examples` are compiled from the example presentation `$path/examples/euclid.tex` (adopted from the beamer manual). They illustrate the output using the `beamerthemeclassyslidesfonts.sty` extension for each theme extension.
+
+[1]: http://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te
