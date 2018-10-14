@@ -70,6 +70,7 @@
 \setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
 
 \setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
+\setbeamercolor{frametitle}{parent=normal text}
 \setbeamercolor{alerted text}{fg=highlight-color}
 \setbeamercolor{progress bar}{fg=accent-color}
 \setbeamercolor{block}{parent=normal text}
@@ -78,6 +79,12 @@
 \setbeamercolor{enumerate item}{parent=normal text, bg=accent-color!50}
 \setbeamercolor{section in toc}{parent=normal text}
 \setbeamercolor{subsection in toc}{parent=normal text}
+\setbeamercolor*{bibliography item}{parent=normal text}
+\setbeamercolor*{bibliography entry author}{parent=normal text, fg=highlight-color}
+\setbeamercolor*{bibliography entry title}{parent=normal text}
+\setbeamercolor*{bibliography entry journal}{parent=normal text}
+\setbeamercolor*{bibliography entry location}{parent=normal text}
+\setbeamercolor*{bibliography entry note}{parent=normal text}
 
 \setbeamerfont{normal text}{family=\sffamily}
 \setbeamerfont{title}{family=\rmfamily, size=\Huge}
@@ -134,7 +141,7 @@
                     % %! Draw the progress bar.
                     \draw[on layer=back, draw=none, fill=fg!15] (0, 0) rectangle (\paperwidth, 0.5cm);%
                     \draw[on layer=main, draw=none, fill=fg] (0, 0) rectangle (\progressbarwidth, 0.5cm);%
-                    \draw[on layer=main, draw=fg!25, line width=1pt] (0, 0cm) -- (\paperwidth, 0cm);%
+                    \draw[on layer=main, draw=fg!50!bg, line width=1pt] (0, 0cm) -- (\paperwidth, 0cm);%
                 \end{tikzpicture}%
             \fi
         \end{beamercolorbox}
@@ -269,8 +276,8 @@
 \setbeamertemplate{bibliography item}[text]
 
 \newenvironment<>{Block}[2][]{%
-	\bgroup%
-	\usebeamercolor{block}%
+    \bgroup%
+    \usebeamercolor{block}%
 	\tcbset{%
 		enhanced%
 		, sharp corners%
@@ -299,12 +306,13 @@
 %		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
 %		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
 		, segmentation style={draw=none}%
-		, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
+        , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
+        , before={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
 		, #1
 	}%
 	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
 	\begin{tcolorbox}%
-	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
+%	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
 }{%
 	\end{tcolorbox}%
 	\egroup%
@@ -347,15 +355,18 @@
     , middle=0pt%
     , boxsep=12pt%
     , boxrule=0pt%
-	, colframe=white%
+    , colframe=bg%
+    , colback=bg%
+    , colbacktitle=bg%
+	, colframe=bg%
 	, colback=bg%
     , colbacktitle=bg%
-    , coltitle=fg%
 	% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
 	% , frame code={
 	% 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);
 	% }%
 	, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+    , before={\usebeamercolor{block}\usebeamerfont{block}\color{fg}}%
 	, listing only%
 	, listing options={%
 		breaklines=true%
@@ -371,10 +382,9 @@
 		, framexrightmargin=0pt%
 		, framexleftmargin=0pt%		
         , numbersep=0pt%,
-        , basicstyle=\ttfamily\small%
+        , basicstyle=\ttfamily\small\color{fg}%
 		, language=#1%
     },%
-    before={\usebeamercolor{block}\usebeamerfont{block}}%
 }
 
 \makeatother
