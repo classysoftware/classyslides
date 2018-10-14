@@ -279,7 +279,8 @@
     \bgroup%
     \usebeamercolor{block}%
 	\tcbset{%
-		enhanced%
+        code={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
+		, enhanced%
 		, sharp corners%
         , no shadow%
 		, top=0pt%
@@ -305,9 +306,8 @@
 %		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
 %		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
 %		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-		, segmentation style={draw=none}%
+%		, segmentation style={draw=none}%
         , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
-        , before={\usebeamerfont{block}\usebeamercolor{block}\color{fg}}%
 		, #1
 	}%
 	%{\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
@@ -341,32 +341,69 @@
 	\end{Block}
 }
 
-%! Code listings with simple customization options (target language for listing and title for tcolorbox)
+% ! Code listings with simple customization options (target language for listing and title for tcolorbox)
 \newtcblisting{Code}[2][]{%
-    enhanced%
-    , sharp corners%
-    , no shadow%
-    , top=0pt%
-    , right=0pt%
-    , bottom=0pt%
-    , left=0pt%
-    , toptitle=0pt%
-    , bottomtitle=-12pt%
-    , middle=0pt%
-    , boxsep=12pt%
-    , boxrule=0pt%
-    , colframe=bg%
-    , colback=bg%
-    , colbacktitle=bg%
-	, colframe=bg%
-	, colback=bg%
-    , colbacktitle=bg%
-	% , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
-	% , frame code={
-	% 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);
-	% }%
-	, title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
-    , before={\usebeamercolor{block}\usebeamerfont{block}\color{fg}}%
+    code={
+        \usebeamercolor{block}\usebeamerfont{block}%
+        \tcbset{%
+            , enhanced%
+            , sharp corners%
+            , no shadow%
+            , top=0pt%
+            , right=0pt%
+            , bottom=0pt%
+            , left=0pt%
+            , toptitle=0pt%
+            , bottomtitle=-12pt%
+            , middle=0pt%
+            , boxsep=12pt%
+            , boxrule=0pt%
+            % , grow to left by=12pt%
+            % , grow to right by=12pt%
+            , colframe=bg%
+            , colback=bg%
+            , colbacktitle=bg%
+            % , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+            % , frame code={%
+            % 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);%
+            % }%
+            % , colframe=dark-gray%
+    %		, fonttitle=\rmfamily%
+    %		, fontupper=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+    %		, fontlower=\fontseries{l}\fontfamily{\sfdefault}\selectfont%
+    %		, shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+    %		, segmentation style={draw=none}%
+            % TODO there is a bug here which prevents the frametitle formatting (bold + italic)
+            , title={%
+                \usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}
+            }%
+        }%
+    }%
+    % , enhanced%
+    % , sharp corners%
+    % , no shadow%
+    % , top=0pt%
+    % , right=0pt%
+    % , bottom=0pt%
+    % , left=0pt%
+    % , toptitle=0pt%
+    % , bottomtitle=-12pt%
+    % , middle=0pt%
+    % , boxsep=12pt%
+    % , boxrule=0pt%
+    % , colframe=bg%
+    % , colback=bg%
+    % , colbacktitle=bg%
+	% , colframe=bg%
+	% , colback=bg%
+    % , colbacktitle=bg%
+	% % , shadow={-1.5pt}{-1.5pt}{0pt}{light-gray!50!white}
+	% % , frame code={
+	% % 	\draw[draw=dark-gray, line width=3pt] (frame.north west) -- (frame.south west);
+	% % }%
+	% % , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}#2}%
+    % , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
+    % % , code={\usebeamercolor{block}\usebeamerfont{block}\color{fg}}%
 	, listing only%
 	, listing options={%
 		breaklines=true%
@@ -384,7 +421,5 @@
         , numbersep=0pt%,
         , basicstyle=\ttfamily\small\color{fg}%
 		, language=#1%
-    },%
+    }%
 }
-
-\makeatother
