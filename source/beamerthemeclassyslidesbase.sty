@@ -14,6 +14,10 @@
 \RequirePackage{lastpage}
 \RequirePackage{refcount}
 
+% COLOR DEFINITIONS
+\colorlet{accent-color}{blue}
+\colorlet{highlight-color}{blue!75}
+
 % HYPERREF SETTINGS
 \hypersetup{colorlinks=false}
 
@@ -81,7 +85,7 @@
 \setbeamercolor*{bibliography entry location}{parent=normal text}
 \setbeamercolor*{bibliography entry note}{parent=normal text}
 
-\setbeamerfont{normal text}{family=\sffamily}
+\setbeamerfont{normal text}{family=\sffamily, size=\Large}
 \setbeamerfont{title page}{family=\rmfamily}
 \setbeamerfont{title}{parent=title page, size=\Huge}
 \setbeamerfont{subtitle}{parent=title page, size=\Large}
@@ -96,7 +100,7 @@
 \setbeamerfont{subsection in toc}{family=\sffamily, series=\fontseries{l}\selectfont}
 \setbeamerfont{block}{parent=normal text, series=\upshape\selectfont}
 \setbeamerfont{block title}{parent=frametitle, size=\large}
-    
+
 % VARIABLES
 \newif\ifcontentpage\contentpagefalse
 
@@ -263,7 +267,80 @@
 	\color{fg}\insertsubenumlabel%
 	\egroup%
 }
-\setbeamertemplate{enumerate enumerate}[classy enumerate subitem]
+\setbeamertemplate{enumerate subitem}[classy enumerate subitem]
+
+\setbeamertemplate{itemize/enumerate body begin}{\Large}
+\setbeamertemplate{itemize/enumerate subbody begin}{\Large}
+%
+% PATCHES
+%
+
+% NOTE patch footline
+\defbeamertemplate{footline}{my classy footline}[1][0]{%
+}
+\setbeamertemplate{footline}[my classy footline]
+
+% NOTE patch headline
+\defbeamertemplate{headline}{my classy headline}[1][0]{%
+}
+\setbeamertemplate{headline}[my classy headline]
+
+% NOTE patch itemize item template, color
+\defbeamertemplate{itemize item}{my classy itemize item}[1][]{%
+    \bgroup%
+    \usebeamercolor{itemize item}%
+    \tikz{%
+        \node[anchor=base, minimum width=0.3\baselineskip, minimum height=0.3\baselineskip, inner sep=0pt, outer sep=0pt, fill=fg, circle] (text) {}%
+    }%
+    \egroup%
+}
+\setbeamertemplate{itemize item}[my classy itemize item]
+\setbeamercolor{itemize item}{fg=accent-color, bg=}
+
+\defbeamertemplate{itemize subitem}{my classy itemize subitem}[1][]{%
+    \bgroup%
+    \usebeamercolor{itemize subitem}\usebeamerfont{itemize subitem}\color{fg}--%
+    \egroup%
+}
+\setbeamertemplate{itemize subitem}[my classy itemize subitem]
+
+% NOTE patch frametitle
+\defbeamertemplate{frametitle}{my classy frametitle}[1][0]{%
+\bgroup%
+\begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
+  \begin{tikzpicture}%
+    \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
+    \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
+    \truncate{\linewidth}{%
+    \insertframetitle%
+    % In case of a split frame, append the frame partition number.
+    % \ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
+    }%
+    };%
+  \end{tikzpicture}%
+\end{beamercolorbox}%
+\egroup%
+}
+\setbeamertemplate{frametitle}[my classy frametitle]
+
+% NOTE patch table of contents left margin
+\setbeamertemplate{section in toc}{%
+  \bgroup%
+  \usebeamerfont{section in toc}\usebeamercolor{section in toc}%
+  \hskip12pt\relax%
+  \inserttocsectionnumber.~\inserttocsection\par%
+  \egroup%
+}
+\setbeamertemplate{subsection in toc}{%
+  \bgroup%
+  \usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}%
+  \hskip24pt\relax%
+  \inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par%
+  \egroup%
+}
+%
+% /PATCHES
+%
 
 % HREF http://tex.stackexchange.com/a/69721
 \setbeamertemplate{section in toc}{{\usebeamerfont{section in toc}\usebeamercolor{section in toc}\inserttocsectionnumber.~\inserttocsection}\par}
