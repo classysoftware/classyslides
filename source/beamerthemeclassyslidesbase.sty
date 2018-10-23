@@ -68,6 +68,8 @@
 \setbeamercolor{title page}{parent=normal text}
 \setbeamercolor{title}{parent=title page}
 \setbeamercolor{subtitle}{parent=title page}
+\setbeamercolor{section in section page}{fg=accent-color, bg=}
+\setbeamercolor{subsection in section page}{fg=accent-color, bg=}
 \setbeamercolor{frametitle}{parent=normal text}
 \setbeamercolor{alerted text}{fg=highlight-color}
 \setbeamercolor{progress bar}{fg=accent-color}
@@ -91,12 +93,12 @@
 \setbeamerfont{alerted text}{series=\bfseries, family=\sffamily}
 \setbeamerfont{title page}{family=\rmfamily}
 \setbeamerfont{title}{parent=title page, size=\Huge}
-\setbeamerfont{subtitle}{parent=title page, size=\Large}
+\setbeamerfont{subtitle}{parent=title page, size=\LARGE}
 \setbeamerfont{author}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
 \setbeamerfont{institute}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
 \setbeamerfont{date}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
-\setbeamerfont{section in section page}{family=\rmfamily, size=\Huge}
-\setbeamerfont{subsection in section page}{family=\rmfamily, size=\Large}
+\setbeamerfont{section in section page}{parent=title}
+\setbeamerfont{subsection in section page}{parent=subtitle}
 \setbeamerfont{frametitle}{family=\sffamily, size=\LARGE, series=\bfseries\itshape\selectfont}
 \setbeamerfont{footline}{family=\rmfamily}
 \setbeamerfont{section in toc}{family=\sffamily, series=\bfseries}
@@ -104,7 +106,7 @@
 \setbeamerfont{caption}{series=\itshape\bfseries, family=\sffamily, size=\scriptsize}
 \setbeamerfont{caption name}{parent=caption, series=\upshape\bfseries}
 \setbeamerfont{block}{parent=normal text, series=\upshape\selectfont}
-\setbeamerfont{block title}{parent=frametitle, size=\large}
+\setbeamerfont{block title}{parent=frametitle, size=\Large}
 \setbeamerfont{enumerate item}{series=\bfseries, family=\sffamily}
 
 % VARIABLES
