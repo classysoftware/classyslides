@@ -24,7 +24,7 @@ This package provides the **classyslides** beamer theme and extensions.
 4. Edit your presentation and compile
 
 ```bash
-# Compile twice to see progress bar
+# Compile twice to see references etc.
 pdflatex quickstart.tex
 pdflatex quickstart.tex
 ```
@@ -37,7 +37,6 @@ Alternatively, you can add the source folder `$path/source` as a local style fil
 
 Main features:
 
-- Small progress bar in the headline
 - Dark and light theme (extensions `beamerthemeclassyslideslight.sty` and `beamerthemeclassyslidesdark.sty`)
 - Preconfigured block, theorem and code environments:
   - `Block`
