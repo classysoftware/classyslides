@@ -4,7 +4,10 @@
 \defbeamertemplate*{footline}{my classy default footer}[1][0]{%
     \bgroup%
         % Only draw the footline on content pages
-        \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth, right]{footline}%
+        \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth]{footline}%
+            \usebeamerfont{footline}%
+            \usebeamercolor{footline}%
+            \color{fg}%
             \ifnum\thepage=1\else%
               \setcounter{@@frame}{\thepage}%
               \setcounter{@@total}{\getpagerefnumber{LastPage}}%
@@ -12,7 +15,9 @@
               \addtocounter{@@total}{-1}%
               \edef\frame{\the\numexpr\the@@frame + 1}%
               \edef\total{\the\numexpr\the@@total + 1}%
-              \frame%
+              \insertshortauthor%
+              \hfill\inserttitle%
+              \hfill\frame%
             \fi%
         \end{beamercolorbox}%
 	\egroup%
