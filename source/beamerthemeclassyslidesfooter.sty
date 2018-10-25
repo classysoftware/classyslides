@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerthemeclassyslidesfooter}[2018/10/25 default footer for classy slides]
+
+\defbeamertemplate*{footline}{my classy default footer}[1][0]{%
+    \bgroup%
+        % Only draw the footline on content pages
+        \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth, right]{footline}%
+            \ifnum\thepage=1\else%
+              \setcounter{@@frame}{\thepage}%
+              \setcounter{@@total}{\getpagerefnumber{LastPage}}%
+              \addtocounter{@@frame}{-1}%
+              \addtocounter{@@total}{-1}%
+              \edef\frame{\the\numexpr\the@@frame + 1}%
+              \edef\total{\the\numexpr\the@@total + 1}%
+              \frame%
+            \fi%
+        \end{beamercolorbox}%
+	\egroup%
+}
+\setbeamertemplate{footline}[my classy default footer]
