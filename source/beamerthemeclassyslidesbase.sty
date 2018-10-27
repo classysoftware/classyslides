@@ -74,7 +74,7 @@
 \setbeamercolor{alerted text}{fg=highlight-color}
 \setbeamercolor{block}{parent=normal text}
 \setbeamercolor{block title}{parent=normal text}
-\setbeamercolor{itemize item}{parent=normal text, fg=highlight-color}
+\setbeamercolor{itemize item}{fg=accent-color, bg=}
 \setbeamercolor{itemize subitem}{parent=itemize item}
 \setbeamercolor{enumerate item}{parent=itemize item}
 \setbeamercolor{enumerate subitem}{parent=itemize item}
@@ -188,22 +188,23 @@
 }
 \setbeamertemplate{classy section page}[my section page]
 
+% NOTE patch itemize item template, color
 \defbeamertemplate{itemize item}{classy itemize item}[1][]{%
     \bgroup%
     \usebeamercolor{itemize item}%
     \tikz{%
-        \draw[draw=none, use as bounding box] rectangle (\baselineskip, \baselineskip);%
-        \node[below left=0pt and 0pt of current bounding box.east, minimum width=0.4\baselineskip, minimum height=0.4\baselineskip, inner sep=0pt, outer sep=0pt, fill=fg, circle] (text) {}%
+        \node[anchor=base, minimum width=0.3\baselineskip, minimum height=0.3\baselineskip, inner sep=0pt, outer sep=0pt, fill=fg, circle] (text) {}%
     }%
     \egroup%
 }
 \setbeamertemplate{itemize item}[classy itemize item]
 
-\setbeamertemplate{itemize subitem}{%
+\defbeamertemplate{itemize subitem}{classy itemize subitem}[1][]{%
     \bgroup%
-    \usebeamercolor{itemize subitem}\usebeamercolor{itemize subitem}{\color{fg}---}%
+    \usebeamercolor{itemize subitem}\usebeamerfont{itemize subitem}\color{fg}--%
     \egroup%
 }
+\setbeamertemplate{itemize subitem}[classy itemize subitem]
 
 \defbeamertemplate{enumerate item}{classy enumerate item}[1][]{%
     \bgroup%
@@ -238,24 +239,6 @@
 % % PATCHES
 % %
 
-% % NOTE patch itemize item template, color
-% \defbeamertemplate{itemize item}{my classy itemize item}[1][]{%
-%     \bgroup%
-%     \usebeamercolor{itemize item}%
-%     \tikz{%
-%         \node[anchor=base, minimum width=0.3\baselineskip, minimum height=0.3\baselineskip, inner sep=0pt, outer sep=0pt, fill=fg, circle] (text) {}%
-%     }%
-%     \egroup%
-% }
-% \setbeamertemplate{itemize item}[my classy itemize item]
-% \setbeamercolor{itemize item}{fg=accent-color, bg=}
-
-% \defbeamertemplate{itemize subitem}{my classy itemize subitem}[1][]{%
-%     \bgroup%
-%     \usebeamercolor{itemize subitem}\usebeamerfont{itemize subitem}\color{fg}--%
-%     \egroup%
-% }
-% \setbeamertemplate{itemize subitem}[my classy itemize subitem]
 
 % % NOTE patch frametitle
 % \defbeamertemplate{frametitle}{my classy frametitle}[1][0]{%
