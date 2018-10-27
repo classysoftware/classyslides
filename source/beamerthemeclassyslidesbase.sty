@@ -120,20 +120,18 @@
 \colorlet{highlight-color}{accent-color!50}
 
 \defbeamertemplate{frametitle}{classy frametitle}[1][0]{%
-    \bgroup%
-    \begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
-        \begin{tikzpicture}%
-            \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
-            \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
-                \truncate{\linewidth}{%
-                    \insertframetitle%
-                    % In case of a split frame, append the frame partition number.
-                    \ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
-                }%
-            };%
-        \end{tikzpicture}%
-    \end{beamercolorbox}%
-    \egroup%
+\bgroup%
+\begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
+  \begin{tikzpicture}%
+    \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
+    \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
+    \truncate{\linewidth}{%
+        \insertframetitle%
+    }%
+    };%
+  \end{tikzpicture}%
+\end{beamercolorbox}%
+\egroup%
 }
 \setbeamertemplate{frametitle}[classy frametitle]
 
@@ -238,26 +236,6 @@
 % %
 % % PATCHES
 % %
-
-
-% % NOTE patch frametitle
-% \defbeamertemplate{frametitle}{my classy frametitle}[1][0]{%
-% \bgroup%
-% \begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
-%   \begin{tikzpicture}%
-%     \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
-%     \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
-%     \truncate{\linewidth}{%
-%     \insertframetitle%
-%     % In case of a split frame, append the frame partition number.
-%     % \ifnum\insertcontinuationcount=0\else~(\insertcontinuationcount)\fi%
-%     }%
-%     };%
-%   \end{tikzpicture}%
-% \end{beamercolorbox}%
-% \egroup%
-% }
-% \setbeamertemplate{frametitle}[my classy frametitle]
 
 % % NOTE patch table of contents left margin
 % \setbeamertemplate{section in toc}{%
