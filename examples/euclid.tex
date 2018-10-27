@@ -3,12 +3,9 @@
 \usepackage{filecontents}
 \usepackage{graphicx}
 
-% Select the classyslides base, fonts and dark theme.
+% Use classyslides base theme and fonts extension
 \usetheme{classyslidesbase}
-\usetheme{classyslidesfooter}
-\usetheme{classyslidesheader}
 \usetheme{classyslidesfonts}
-\usetheme{classyslideslight}
 \mode<presentation>
 
 \title{There Is No Largest Prime Number}
@@ -39,10 +36,9 @@
 \end{filecontents}
 \addbibresource{./euclid.bib}
 
-%!%!%!%!%!%!%
-% document  %
-%!%!%!%!%!%!%
-
+%
+% Document 
+%
 \begin{document}
 
 \begin{frame}
@@ -63,11 +59,12 @@
 \frame{\sectionpage}
 
 \contentpagetrue
-\begin{frame}
+\begin{frame}[allowframebreaks]
   \frametitle{What Are Prime Numbers?}
   \begin{Definition}{Prime number}
     A \emph{prime number} is a number that has exactly two divisors.
   \end{Definition}
+  \framebreak
   \begin{Example}
     \begin{itemize}
       \item 2 is prime (two divisors: 1 and 2).
