@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{beamerthemeclassyslidesfooter}[2018/10/25 default footer for classy slides]
 
+\setbeamercolor{footline}{parent=normal text, fg=foreground-color!25!background-color}
+\setbeamerfont{footline}{family=\sffamily, size=\scriptsize}
+
 \defbeamertemplate*{footline}{my classy default footer}[1][0]{%
   \bgroup%
   \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth]{footline}%
@@ -9,7 +12,7 @@
       \usebeamercolor{footline}%
       \color{fg}%
       \insertshortauthor%
-      \hfill\inserttitle%
+      \hfill{\usebeamerfont{title in footline}\inserttitle}%
       \hfill\insertframenumber%
     \fi%
   \end{beamercolorbox}%
