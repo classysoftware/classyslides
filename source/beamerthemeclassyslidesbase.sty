@@ -232,32 +232,21 @@
 }
 \setbeamertemplate{headline}[my classy headline]
 
-% %
-% % PATCHES
-% %
-
-% % NOTE patch table of contents left margin
-% \setbeamertemplate{section in toc}{%
-%   \bgroup%
-%   \usebeamerfont{section in toc}\usebeamercolor{section in toc}%
-%   \hskip12pt\relax%
-%   \inserttocsectionnumber.~\inserttocsection\par%
-%   \egroup%
-% }
-% \setbeamertemplate{subsection in toc}{%
-%   \bgroup%
-%   \usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}%
-%   \hskip24pt\relax%
-%   \inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par%
-%   \egroup%
-% }
-% %
-% % /PATCHES
-% %
-
 % HREF http://tex.stackexchange.com/a/69721
-\setbeamertemplate{section in toc}{{\usebeamerfont{section in toc}\usebeamercolor{section in toc}\inserttocsectionnumber.~\inserttocsection}\par}
-\setbeamertemplate{subsection in toc}{\hskip1em\relax\usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
+\setbeamertemplate{section in toc}{%
+  \bgroup%
+  \usebeamerfont{section in toc}\usebeamercolor{section in toc}%
+  \hskip12pt\relax%
+  \inserttocsectionnumber.~\inserttocsection\par%
+  \egroup%
+}
+\setbeamertemplate{subsection in toc}{%
+  \bgroup%
+  \usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}%
+  \hskip24pt\relax%
+  \inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par%
+  \egroup%
+}
 
 % HREF https://tex.stackexchange.com/a/176862
 \setbeamertemplate{bibliography item}[text]
