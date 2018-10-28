@@ -90,6 +90,7 @@ The `quickstart.tex` file bootstraps a presentation with the following propertie
 - Default **font** theme (extension `beamerfontthemeclassyslides.sty`)
 - Optional **header** and **footer** (extensions `beamerinnerthemeheader.sty` and `beamerinnerthemefooter.sty`)
 - Optional **dark** and **light themes** (extensions `beamercolorthemeclassyslideslight.sty` and `beamercolorthemeclassyslidesdark.sty`)
+- **Background image** support (extension `beamerinnerthemeclassyslidesbackgrounds.sty`)
 - Preconfigured **block**, **theorem** and **code environments**:
   - `Block`
   - `Definition`
@@ -98,7 +99,41 @@ The `quickstart.tex` file bootstraps a presentation with the following propertie
   - `Proof`
   - `Code` (uses the `listings` package via `tcolorbox`)
 
-# EXAMPLES
+## EXTENSIONS
+
+### BACKGROUNDS
+
+The backgrounds extensions is contained in the file `./source/beamerinnerthemeclassyslidesbackgrounds.sty`.
+
+It may be included with
+
+```latex
+\usebeamertheme[..., backgrounds]{classyslides}
+```
+
+The options for setting the background image and its opacity are exposed via `pgfkeys` under the path `/classyslides/backgrounds`: currently only `/image` and `/opacity` are available, e.g.
+
+```latex
+\pgfkeys{%
+  /classyslides/backgrounds/.cd%
+  , image=<image>%
+  , opacity=<opacity>%
+}
+```
+
+sets the background image URI respectively the image opacity to the value of the placeholders `<image>` and `<opacity>`.
+
+To actually show the background in a frame, the option `show background` must be passed. I.e.
+
+```latex
+\frame[show background]{
+  \frametitle{Title with background}
+}
+```
+
+will draw the image set using pgfkeys in the background of the frame.
+
+## EXAMPLES
 
 Sample PDF outputs are provided in `./examples`. These files illustrate outputs for the example presentation `./examples/euclid.tex`---which was adopted from the beamer manual---for the following extension options:
 
@@ -114,5 +149,8 @@ Sample PDF outputs are provided in `./examples`. These files illustrate outputs 
 - `euclid-dark-light-header-footer.pdf`
   - Default fonts theme, light color theme, header and footer extensions
   - Produced with `\usetheme[fonts, header, footer, colors=dark]{classylides}`
+- `euclid-dark-light-header-footer-background.pdf`
+  - Default fonts theme, light color theme, header, footer and backgrounds extensions
+  - Produced with `\usetheme[fonts, header, footer, backgrounds, colors=dark]{classylides}`
 
 [1]: http://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te
