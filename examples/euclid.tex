@@ -4,7 +4,15 @@
 \usepackage{graphicx}
 
 % Use classyslides theme and pass options
-\usetheme[fonts, header, footer, colors=light]{classyslides} 
+\usetheme[%
+  fonts%
+  , header%
+  , footer%
+  , backgrounds%
+  , colors=light%
+]{classyslides}
+\pgfkeys{/classyslides/backgrounds/.cd, image=primes}
+\pgfkeys{/classyslides/backgrounds/.cd, opacity=0.2}
 \mode<presentation>
 
 \title{There Is No Largest Prime Number}
@@ -40,7 +48,7 @@
 %
 \begin{document}
 
-\begin{frame}
+\begin{frame}[show background]
 \titlepage
 \end{frame}
 
@@ -48,14 +56,16 @@
 
 \contentpagetrue
 \begin{frame}
-\frametitle{Outline}
-\tableofcontents
+  \frametitle{Outline}
+  \tableofcontents
 \end{frame}
 
 \section{Motivation}
 \subsection{The Basic Problem That We Studied}
 \contentpagefalse
-\frame{\sectionpage}
+\frame[show background]{
+  \sectionpage
+}
 
 \contentpagetrue
 \begin{frame}[allowframebreaks]
@@ -108,7 +118,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile, allowframebreaks]
   \frametitle{An Algorithm For Finding Prime Numbers.}
   \begin{Code}[C++]{FindPrimeNumbers}
 int main (void)
@@ -127,6 +137,7 @@ if (is_prime[i])
     Note the use of \verb|std::|.
   \end{uncoverenv}
 \end{frame}
+
 
 \frame{
   \frametitle{It's me, Euclid}
