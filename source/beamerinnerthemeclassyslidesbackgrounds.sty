@@ -22,8 +22,9 @@
   \ifnum\pdf@strcmp{\image}{\@empty}=0\relax%
     \PackageError{beamerinnerthemeclassyslidesbackgrounds}{Missing value for key "/classyslides/backgrounds/image"}{}%
   \else%
+    \usebeamercolor{normaltext}%
     \tikz{%
-      \draw[use as bounding box] (0, 0) rectangle (\paperwidth, \paperheight);%
+      \draw[use as bounding box, fill=bg] (0, 0) rectangle (\paperwidth, \paperheight);%
       \node[opacity=\opacity, inner sep=0] at (current bounding box.center) {%
         \includegraphics[height=\paperheight, keepaspectratio]{\image}%
       };%
@@ -48,7 +49,10 @@
 }
 
 \BeforeBeginEnvironment{frame}{%
-  \usebackgroundtemplate{}%
+  \usebeamercolor{normaltext}%
+  \usebackgroundtemplate{%
+    \tikz{\draw[use as bounding box, opacity=1.0, fill=bg] (0, 0) rectangle (\paperwidth, \paperheight);}%
+  }%
 }
 
 \makeatother
