@@ -32,26 +32,23 @@
 % Document
 \begin{document}
 
-\begin{frame}
+\frame[hide header, hide footer]{
 \titlepage
-\end{frame}
+}
 
-\contentpagetrue
-\begin{frame}
+\frame{
 \frametitle{Outline}
 \tableofcontents
-\end{frame}
+}
 
 \section{Section A}
 \subsection{Subsection I}
-\contentpagefalse
-\frame{\sectionpage}
+\frame[hide header, hide footer]{\sectionpage}
 
-\contentpagetrue
-\begin{frame}
+\frame{
   \frametitle{First slide}
   Stay classy!
-\end{frame}
+}
 
 \begin{frame}[fragile]
   \frametitle{Hello world}
