@@ -61,7 +61,7 @@ cat <<EOF > my-presentation.tex
 
 \frame{
   \frametitle{First slide}
-  Stay classy!
+  \Huge\alert{Stay classy!}
 }
 \end{document}
 EOF
