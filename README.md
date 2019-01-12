@@ -2,95 +2,91 @@
 
 This package provides the **classyslides** beamer theme and extensions.
 
-## USAGE
+## Getting Started
 
-### BASIC USAGE
+### 1. Register classycv source files
 
-1. Set up **classyslides** as a local style file
+**Note:** The following instructions are for macOS 10.14.2 and assume that [MacTeX][2] is installed. Instructions for other platforms can be found in [this StackOverflow thread][1].
 
-   Comprehensive instructions for multiple platforms/distributions can be found in this [StackOverflow answer][1].
+Clone this repository into your local `texmf` directory
 
-2. Create a Beamer presentation and import the **classyslides** theme using `\usetheme{classyslides}`
+```bash
+cd ~/Library/texmf/tex/latex
+git clone https://github.com/classysoftware/classyslides.git
+```
 
-   ```latex
-   \documentclass{beamer}
+Verify by running `ls -l`. The output should show an entry for the `classyslides` folder where (`<user>` and `<group>` are placeholders for your user name and user group).
 
-   % Select the classyslides theme
-   \usetheme{classyslides}
-   \mode<presentation>
+```bash
+ls -la
+total 0
+# ...
+drwxr-xr-x  10 main  staff  320 12 Jan 19:39 classyslides
+```
 
-   % Settings
-   \title{My classy presentation}
+Run `texhash` as super user to add classycv's class and style files to the index.
 
-   %
-   % Document
-   %
-   \begin{document}
+```bash
+sudo texhash
+```
 
-   \begin{frame}
-   \titlepage
-   \end{frame}
+### 2. Create project folder for your presentation and add content
 
-   \contentpagetrue
-   \begin{frame}
-     \frametitle{First slide}
-     Stay classy!
-   \end{frame}
+Change to a directory of your choice and create a project folder (we simply use `~/Desktop` and `example-cv` as the folder name in this example)
 
-   \end{document}
-   ```
+```bash
+cd ~/Desktop
+mkdir my-presentation
+cd my-presentation
+```
 
-### USING THE QUICKSTART FILE
+Next, add a file `my-presentation.tex` containing a presentation stub
 
-#### About the `quickstart.tex` file
+```bash
+cat <<EOF > my-presentation.tex
+\documentclass{beamer}
 
-The `quickstart.tex` file bootstraps a presentation with the following properties:
+\usetheme{classyslides}
+\mode<presentation>
 
-- Default font theme extension
-- Header and footer extensions
-- Light color theme
-- Table of contents and references
+\title{Example}
+\author[me]{Me \\ me@mail.com}
+\date{\today}
 
-#### Instructions
+\begin{document}
 
-1. Create a folder for your presentation (under path `$path`)
+\frame{
+\titlepage
+}
 
-   ```bash
-   mkdir $path
-   ```
+\frame{
+  \frametitle{First slide}
+  Stay classy!
+}
+\end{document}
+EOF
+```
 
-2. Change to the presentation directory and pull this repository
+### 3. Edit and compile output
 
-   ```bash
-   cd $path
-   git clone https://github.com/classysoftware/classyslides.git
-   ```
+Edit your presentation and compile it to PDF.
 
-3. Copy the quickstart file in `./quickstart/quickstart.tex` and link the source files
+**Note:** If you don't know how to work with _Beamer_, have a look at the example presentations in the folder `examples/` or the quickstart presentation template in `quickstart/`.
 
-   ```bash
-   cp ./classyslides/quickstart/quickstart.tex .
-   ln -s classyslides/source/* .
-   ```
+Run the following command:
 
-4. Edit your presentation and compile
+```bash
+latexmk -pdfxe my-presentation.tex && open my-presentation.pdf
+```
 
-   ```bash
-   # Compile twice for correct page numbers, progress bar rendering, references etc.
-   pdflatex quickstart.tex
-   pdflatex quickstart.tex
-   ```
+This should open a PDF viewer should and show a minimal presentation containing only a title slide and one content slide.
 
-## ABOUT
+## About _classyslides_
 
 **Classyslides** is a minimalistic beamer theme with focus on clear layout and efficient use of space.
 
-### FEATURES
+### Core Features
 
-- Default **font** theme (extension `beamerfontthemeclassyslides.sty`)
-- Optional **header** and **footer** (extensions `beamerinnerthemeheader.sty` and `beamerinnerthemefooter.sty`)
-- Optional **dark** and **light themes** (extensions `beamercolorthemeclassyslideslight.sty` and `beamercolorthemeclassyslidesdark.sty`)
-- **Background image** support (extension `beamerinnerthemeclassyslidesbackgrounds.sty`)
 - Preconfigured **block**, **theorem** and **code environments**:
   - `Block`
   - `Definition`
@@ -98,59 +94,26 @@ The `quickstart.tex` file bootstraps a presentation with the following propertie
   - `Theorem`
   - `Proof`
   - `Code` (uses the `listings` package via `tcolorbox`)
+- **Font** theme with easy to read fonts (extension `beamerfontthemeclassyslides.sty`)
+- Optional **header** with progress bar and **footer** with page numbers (extensions `beamerinnerthemeheader.sty` and `beamerinnerthemefooter.sty`)
+- Optional **dark** and **light themes** (extensions `beamercolorthemeclassyslideslight.sty` and `beamercolorthemeclassyslidesdark.sty`)
+- **Background image** support (extension `beamerinnerthemeclassyslidesbackgrounds.sty`)
 
-## EXTENSIONS
+## Examples
 
-### BACKGROUNDS
+Sample PDF outputs for various extension configurations are provided in the folder `examples/build`. Extensions are indicated in the file name as follows:
 
-The backgrounds extensions is contained in the file `./source/beamerinnerthemeclassyslidesbackgrounds.sty`.
-
-It may be included with
-
-```latex
-\usebeamertheme[..., backgrounds]{classyslides}
-```
-
-The options for setting the background image and its opacity are exposed via `pgfkeys` under the path `/classyslides/backgrounds`: currently only `/image` and `/opacity` are available, e.g.
-
-```latex
-\pgfkeys{%
-  /classyslides/backgrounds/.cd%
-  , image=<image>%
-  , opacity=<opacity>%
-}
-```
-
-sets the background image URI respectively the image opacity to the value of the placeholders `<image>` and `<opacity>`.
-
-To actually show the background in a frame, the option `show background` must be passed. I.e.
-
-```latex
-\frame[show background]{
-  \frametitle{Title with background}
-}
-```
-
-will draw the image set using pgfkeys in the background of the frame.
-
-## EXAMPLES
-
-Sample PDF outputs are provided in `./examples`. These files illustrate outputs for the example presentation `./examples/euclid.tex`---which was adopted from the beamer manual---for the following extension options:
-
-- `euclid.pdf`
-  - Only default fonts theme extension
-  - Produced with `\usetheme[fonts]{classylides}`
-- `euclid-light.pdf`
+- `euclid--fonts-light.pdf`
   - Default fonts theme and light color theme extensions
   - Produced with `\usetheme[fonts, colors=light]{classylides}`
-- `euclid-dark.pdf`
+- `euclid--fonts-dark.pdf`
   - Default fonts theme and dark color theme extensions
   - Produced with `\usetheme[fonts, colors=dark]{classylides}`
-- `euclid-dark-light-header-footer.pdf`
-  - Default fonts theme, light color theme, header and footer extensions
-  - Produced with `\usetheme[fonts, header, footer, colors=dark]{classylides}`
-- `euclid-dark-light-header-footer-background.pdf`
+- `euclid--fonts-light-header-footer-background.pdf`
   - Default fonts theme, light color theme, header, footer and backgrounds extensions
-  - Produced with `\usetheme[fonts, header, footer, backgrounds, colors=dark]{classylides}`
+  - Produced with `\usetheme[fonts, header, footer, backgrounds, colors=light]{classylides}`
+
+The example presentation was adopted from the Euclid presentation example of the [Beamer user manual][2] (Section 3., pp. 21).
 
 [1]: http://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te
+[2]: https://ctan.org/pkg/beamer
