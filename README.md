@@ -21,7 +21,7 @@ Verify by running `ls -l`. The output should show an entry for the `classyslides
 ls -la
 total 0
 # ...
-drwxr-xr-x  10 main  staff  320 12 Jan 19:39 classyslides
+drwxr-xr-x  10 <user>  <group>  320 12 Jan 19:39 classyslides
 ```
 
 Run `texhash` as super user to add classycv's class and style files to the index.
@@ -32,7 +32,7 @@ sudo texhash
 
 ### 2. Create project folder for your presentation and add content
 
-Change to a directory of your choice and create a project folder (we simply use `~/Desktop` and `example-cv` as the folder name in this example)
+Change to a directory of your choice and create a project folder (we simply use `~/Desktop` and `my-presentation` as the folder name in this example)
 
 ```bash
 cd ~/Desktop
